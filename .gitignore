@@ -1,0 +1,3 @@
+#Ignores testbench files
+*.cf
+*.vcd
