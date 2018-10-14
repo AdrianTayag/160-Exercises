@@ -158,7 +158,7 @@ begin
     e16 => e16);
 
     process
-      variable temp : std_logic_vector(3 downto 0);
+      variable temp : std_logic_vector(4 downto 0);
 
     function to_std_logic(i : in integer) return std_logic is
     begin
@@ -335,12 +335,12 @@ begin
     end mux_testS0;
 
     begin
-      for i in 0 to 15 loop
-        temp := std_logic_vector(to_unsigned(i, 4));
-        a1 <= temp(2);
-        a0 <= temp(2);
+      for i in 0 to 31 loop
+        temp := std_logic_vector(to_unsigned(i, 5));
+        a1 <= temp(4);
+        a0 <= temp(3);
         b1 <= temp(2);
-        b0 <= temp(2);
+        b0 <= temp(1);
 
         q01 <= temp(0);
         q02 <= not temp(0);
