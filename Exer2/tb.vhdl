@@ -1,9 +1,13 @@
-entity mux2bitfulladdertb is
-end mux2bitfulladdertb;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
-architecture tb of mux2bitfulladdertb is
+entity tb is
+end tb;
 
-component mux2bitfulladder
+architecture behav of tb is
+
+component main
   port(
   q01  : in  std_logic;
   q02  : in  std_logic;
@@ -100,12 +104,20 @@ component mux2bitfulladder
 
   signal cout : std_logic;
   signal s1   : std_logic;
-  signal s0   : std_logic);
+  signal s0   : std_logic;
 
 begin
 
-  test : entity work.mux2mux2bitfulladder(IF_STATEMENT)
+  ag : entity work.main(IF_STATEMENT)
     port map (
+    a1 => a1,
+    a0 => a0,
+    b1 => b1,
+    b0 => b0,
+    cout => cout,
+    s1 => s1,
+    s0 => s0,
+
     q01 => q01,
     q02 => q02,
     q03 => q03,
@@ -146,7 +158,7 @@ begin
     e16 => e16);
 
     process
-      variable temp : std_logic_vector(2 downto 0);
+      variable temp : std_logic_vector(3 downto 0);
 
     function to_std_logic(i : in integer) return std_logic is
     begin
@@ -174,7 +186,7 @@ begin
     signal e14 : std_logic;
     signal e15 : std_logic;
     signal e16 : std_logic;
-    signal a1 : std_logic;
+    signal a1  : std_logic;
     signal a0  : std_logic;
     signal b1  : std_logic;
     signal b0  : std_logic)
@@ -324,7 +336,7 @@ begin
 
     begin
       for i in 0 to 15 loop
-        temp := std_logic_vector(to_unsigned(i, 3));
+        temp := std_logic_vector(to_unsigned(i, 4));
         a1 <= temp(2);
         a0 <= temp(2);
         b1 <= temp(2);
@@ -378,7 +390,9 @@ begin
         assert(s0 = mux_testS0(q01, q02, q03, q04, a1, a0, b1, b0))
           report "Error : S0 incorrect" severity warning;
       end loop;
-
+      assert false report "mabuhay!" severity note;
       wait;
 
     end process;
+
+  end behav;

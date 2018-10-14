@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 --q for s0, w for s1, e for cout
-entity mux2bitfulladder is
+entity main is
   port(
     q01   : in  std_logic;
     q02   : in  std_logic;
@@ -50,14 +50,14 @@ entity mux2bitfulladder is
     cout  : out  std_logic;
     s1    : out  std_logic;
     s0    : out std_logic);
-end mux2bitfulladder;
+end main;
 
-architecture IF_STATEMENT of mux2bitfulladder is
+architecture IF_STATEMENT of main is
 begin
 
-  process(a1, a0, b1, b0
-          q01, q02, q03, q04
-          w01, w02, w03, w04, w05, w06, w07, w08, w09, w10, w11, w12, w13, w14, w15, w16
+  process(a1, a0, b1, b0,
+          q01, q02, q03, q04,
+          w01, w02, w03, w04, w05, w06, w07, w08, w09, w10, w11, w12, w13, w14, w15, w16,
           e01, e02, e03, e04, e05, e06, e07, e08, e09, e10, e11, e12, e13, e14, e15, e16)
   begin
     if    (a1 = '0') and (a0 = '0') and (b1 = '0') and (b0 = '0') then
