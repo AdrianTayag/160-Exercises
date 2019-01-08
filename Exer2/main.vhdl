@@ -1,8 +1,12 @@
+-- This is a multiplexer config for a 2 bit full adder.
+
+-- importing std_logic libraries
 library ieee;
 use ieee.std_logic_1164.all;
 --q for s0, w for s1, e for cout
 entity main is
   port(
+  -- declaring i/o ports
     q01   : in  std_logic;
     q02   : in  std_logic;
     q03   : in  std_logic;
@@ -13,7 +17,7 @@ entity main is
     w03  : in  std_logic;
     w04  : in  std_logic;
     w05  : in  std_logic;
-    w06   : in  std_logic;
+    w06  : in  std_logic;
     w07  : in  std_logic;
     w08  : in  std_logic;
     w09  : in  std_logic;
@@ -54,7 +58,7 @@ end main;
 
 architecture IF_STATEMENT of main is
 begin
-
+-- Logic part. Declaring rules.
   process(a1, a0, b1, b0,
           q01, q02, q03, q04,
           w01, w02, w03, w04, w05, w06, w07, w08, w09, w10, w11, w12, w13, w14, w15, w16,

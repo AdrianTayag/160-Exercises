@@ -1,3 +1,4 @@
+-- Importing std logic library
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
@@ -6,7 +7,7 @@ entity tb is
 end tb;
 
 architecture behav of tb is
-
+-- setting up i/o ports
 component main
   port(
   q01  : in  std_logic;
@@ -57,7 +58,7 @@ component main
   s1   : out  std_logic;
   s0   : out std_logic);
   end component;
-
+-- declaring variables to be corresponded with main file
   signal q01  : std_logic;
   signal q02  : std_logic;
   signal q03  : std_logic;
@@ -107,7 +108,7 @@ component main
   signal s0   : std_logic;
 
 begin
-
+-- mapping ports from main file variables
   ag : entity work.main(IF_STATEMENT)
     port map (
     a1 => a1,
@@ -158,8 +159,9 @@ begin
     e16 => e16);
 
     process
+    -- downto means MSB is 4 and LSB is 0 as index
       variable temp : std_logic_vector(4 downto 0);
-
+    -- function for converting integer to std_logic
     function to_std_logic(i : in integer) return std_logic is
     begin
       if i = 0 then
@@ -168,7 +170,7 @@ begin
         return '1';
       end if;
     end to_std_logic;
-
+  -- Testbench part of Cout
   function mux_testCout (
     signal e01 : std_logic;
     signal e02 : std_logic;
@@ -227,7 +229,7 @@ begin
       return e16;
     end if;
   end mux_testCout;
-
+  -- Testbench of S1
   function mux_testS1 (
     signal w01 : std_logic;
     signal w02 : std_logic;
@@ -286,7 +288,7 @@ begin
       return w16;
     end if;
   end mux_testS1;
-
+  -- Testbench of S0
     function mux_testS0 (
       signal q01 : std_logic;
       signal q02 : std_logic;
@@ -382,7 +384,7 @@ begin
         e16 <= to_std_logic(1);
 
         wait for 1 ms;
-
+        -- Checking values for errors
         assert(Cout = mux_testCout(e01, e02, e03, e04, e05, e06, e07, e08, e09, e10, e11, e12, e13, e14, e15, e16, a1, a0, b1, b0))
           report "Error : Cout incorrect" severity warning;
         assert(s1 = mux_testS1(w01, w02, w03, w04, w05, w06, w07, w08, w09, w10, w11, w12, w13, w14, w15, w16, a1, a0, b1, b0))
